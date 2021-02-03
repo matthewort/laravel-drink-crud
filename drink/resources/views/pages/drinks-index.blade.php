@@ -11,6 +11,8 @@
             <a href="{{ route('drink-show', $drink -> id) }}"> {{-- drink-show corrisponde al nome della rotta definito da noi in web.php --}}       
             {{ $drink -> name }}
             </a>
+            <a href="{{ route('drink-edit', $drink -> id) }}">EDIT</a>
+            <a href="{{ route('drink-delete', $drink -> id) }}">DELETE</a>
         </li>
 
         @endforeach 

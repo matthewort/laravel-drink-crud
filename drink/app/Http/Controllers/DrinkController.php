@@ -25,7 +25,24 @@ class DrinkController extends Controller
     }
 
     public function store(Request $request) {
-        Drink::create($request -> all());
-        return redirect() -> route('drinks-index'); //non devo scrivere pages.drinks-index perché non è un return view
+        $newDrink = Drink::create($request -> all());
+        return redirect() -> route('drink-show', $newDrink -> id); //non devo scrivere pages.drinks-index perché non è un return view
+    }
+
+    public function edit($id) {
+        $drink = Drink::findOrFail($id);
+        return view('pages.drink-edit', compact('drink'));
+    }
+
+    public function update(Request $request, $id) {
+        $drink = Drink::findOrFail($id);
+        $drink -> update($request -> all());
+        return redirect() -> route('drink-show', $drink -> id);
+    }
+
+    public function delete($id) {
+        $drink = Drink::findOrFail($id);
+        $drink -> delete();
+        return redirect() -> route('drinks-index');
     }
 }
